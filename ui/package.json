@@ -1,0 +1,23 @@
+{
+  "name": "hengda-nightawk-002-ui",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "kill8268",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
+    "bootstrap": "5.0.0-alpha1",
+    "dayjs": "^1.8.36",
+    "popper.js": "^1.16.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@snowpack/app-scripts-react": "^1.10.0",
+    "prettier": "^2.1.2",
+    "snowpack": "^2.11.1"
+  }
+}
