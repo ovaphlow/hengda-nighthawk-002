@@ -41,7 +41,7 @@ export default function Filter() {
     ])
 
     window
-      .fetch(`/api/nighthawk-002/?`, {
+      .fetch(`/api/nighthawk-002/`, {
         method: 'PUT',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({}),
@@ -130,9 +130,10 @@ export default function Filter() {
 
         <div className="card shadow rounded-0">
           <div className="table-responsive">
-            <table className="table table-sm table-bordered table-hover">
+            <table className="table table-sm table-hover">
               <thead>
                 <tr>
+                  <td>序号</td>
                   <td>车间</td>
                   <td>检查时间</td>
                   <td>检查人</td>
@@ -143,11 +144,18 @@ export default function Filter() {
               <tbody>
                 {list && list.map(item => (
                   <tr key={item.id}>
-                    <td>{item.dept.name}</td>
-                    <td>{item.dept.datime}</td>
-                    <td>{item.dept.staff}</td>
-                    <td>{item.dept.route}</td>
-                    <td>''</td>
+                    <td>
+                      <a href={`#/${item.id}`}>
+                        <FontAwesomeIcon icon={faEdit} fixedWidth />
+                        编辑
+                      </a>
+                      {item.id}
+                    </td>
+                    <td>{item.dept}</td>
+                    <td>{dayjs(item.datime).format('YYYY-MM-DD HH:mm')}</td>
+                    <td>{item.staff}</td>
+                    <td>{item.route}</td>
+                    <td>{item.json_doc.text}</td>
                   </tr>
                 ))}
               </tbody>

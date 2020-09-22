@@ -3,5 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "kill8268",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@koa/router": "^9.4.0",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.1.2"
+  }
 }

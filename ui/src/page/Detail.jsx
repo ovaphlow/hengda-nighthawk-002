@@ -6,12 +6,11 @@ import reducer from '../utils/reducer';
 import useAuth from '../utils/useAuth';
 
 const initial_detail = {
-  dept_id: '',
-  dept_name: '',
+  dept: '',
   datime: dayjs().format('YYYY-MM-DD HH:mm'),
   route: '',
   staff: '',
-  '???':''
+  text:''
 };
 
 const Editbar = React.lazy(() => import('../components/Editbar'));
@@ -58,12 +57,11 @@ export default function Detail() {
       .fetch(`/api/nighthawk-002/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        dispatch({ type: 'dept_id', payload: data.dept.id });
-        dispatch({ type: 'dept_name', payload: data.dept.name });
-        dispatch({ type: 'datime', payload: dayjs(data.datime).format('YYYY-MM-DD YYYY-MM-DD HH:mm') });
+        dispatch({ type: 'dept', payload: data.dept });
+        dispatch({ type: 'datime', payload: dayjs(data.datime).format('YYYY-MM-DD HH:mm') });
         dispatch({ type: 'route', payload: data.route });
         dispatch({ type: 'staff', payload: data.staff });
-        dispatch({ type: '???', payload: data['???'] });
+        dispatch({ type: 'text', payload: data.json_doc.text });
       });
   }, [])
 
@@ -117,26 +115,26 @@ export default function Detail() {
               <div className="col">
                 <label className="form-label">车间</label>
                 <select className="form-select"
-                  value={detail.dept_id}
+                  value={detail.dept}
                   onChange={(event) => {
                     dispatch({
-                      type: 'dept_id',
+                      type: 'dept',
                       payload: event.target.value,
                     })
-                    dispatch({
-                      type: 'dept_name',
-                      payload: event.target.options[event.target.selectedIndex].text,
-                    })
+                    // dispatch({
+                    //   type: 'dept',
+                    //   payload: event.target.options[event.target.selectedIndex].text,
+                    // })
                   }}
                 >
                   <option value="">未选择</option>
                   {dept && dept.map((item) =>
-                    <option key={item.id} value={item.id}>{item.name}</option>)}
+                    <option key={item.id} >{item.name}</option>)}
                 </select>
               </div>
               <div className="col">
                 <label className="form-label">检查时间</label>
-                <input type="date" className="form-select"
+                <input type="datetime-local" className="form-select"
                   value={detail.datime}
                   onChange={(event) =>
                     dispatch({
@@ -149,10 +147,10 @@ export default function Detail() {
               <div className="col">
                 <label className="form-label">检查人</label>
                 <select className="form-select"
-                  value={detail.g_staff1}
+                  value={detail.staff}
                   onChange={(event) =>
                     dispatch({
-                      type: 'g_staff1',
+                      type: 'staff',
                       payload: event.target.value,
                     })
                   }
@@ -182,10 +180,10 @@ export default function Detail() {
               <div className="col-12">
                 <label className="form-label">发现问题情况</label>
                 <textarea className="form-control"
-                  value={detail.rail}
+                  value={detail.text}
                   onChange={(event) =>
                     dispatch({
-                      type: 'rail',
+                      type: 'text',
                       payload: event.target.value,
                     })
                   }
